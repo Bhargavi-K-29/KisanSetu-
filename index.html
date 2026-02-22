@@ -1,0 +1,182 @@
+console.log("app.js loaded");
+
+const uploadZone = document.getElementById("uploadZone");
+const imageInput = document.getElementById("imageInput");
+const previewWrap = document.getElementById("previewWrap");
+const previewImg = document.getElementById("previewImg");
+const removeImg = document.getElementById("removeImg");
+
+const analyzeBtn = document.getElementById("analyzeBtn");
+
+const cityInput = document.getElementById("city");
+const cropInput = document.getElementById("cropInput");
+
+const resultsPanel = document.getElementById("resultsPanel");
+
+const diseaseName = document.getElementById("diseaseName");
+const severityBadge = document.getElementById("severityBadge");
+const recommendation = document.getElementById("recommendation");
+const confidenceFill = document.getElementById("confidenceFill");
+
+const weatherContent = document.getElementById("weatherContent");
+const marketContent = document.getElementById("marketContent");
+
+const governmentSchemes = document.getElementById("governmentSchemes");
+
+let selectedFile = null;
+
+////////////////////////////////////////////////////////////
+//// UPLOAD CLICK FIX
+////////////////////////////////////////////////////////////
+
+uploadZone.addEventListener("click", function () {
+    console.log("Upload zone clicked");
+    imageInput.click();
+});
+
+////////////////////////////////////////////////////////////
+//// IMAGE SELECT
+////////////////////////////////////////////////////////////
+
+imageInput.addEventListener("change", function () {
+
+    if (this.files.length > 0) {
+
+        selectedFile = this.files[0];
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+
+            previewImg.src = e.target.result;
+            previewWrap.classList.remove("hidden");
+
+        };
+
+        reader.readAsDataURL(selectedFile);
+
+    }
+
+});
+
+////////////////////////////////////////////////////////////
+//// REMOVE IMAGE
+////////////////////////////////////////////////////////////
+
+removeImg.addEventListener("click", function () {
+
+    selectedFile = null;
+    imageInput.value = "";
+
+    previewWrap.classList.add("hidden");
+
+});
+
+////////////////////////////////////////////////////////////
+//// ANALYZE BUTTON FIX
+////////////////////////////////////////////////////////////
+
+analyzeBtn.addEventListener("click", async function () {
+
+    console.log("Analyze clicked");
+
+    if (!selectedFile) {
+        alert("Please upload image");
+        return;
+    }
+
+    if (!cityInput.value) {
+        alert("Enter city");
+        return;
+    }
+
+    if (!cropInput.value) {
+        alert("Enter crop");
+        return;
+    }
+
+    analyzeBtn.innerText = "Analyzing...";
+
+    const formData = new FormData();
+
+    formData.append("image", selectedFile);
+    formData.append("city", cityInput.value);
+    formData.append("crop", cropInput.value);
+
+    try {
+
+        const res = await fetch("/api/diagnose", {
+
+            method: "POST",
+            body: formData
+
+        });
+
+        const data = await res.json();
+
+        console.log(data);
+
+        //////////////////////////////////////////////////////
+        // SHOW RESULT
+        //////////////////////////////////////////////////////
+
+        resultsPanel.classList.remove("hidden");
+
+        diseaseName.innerText = data.vision_result.disease;
+
+        recommendation.innerText =
+            data.vision_result.recommendation;
+
+        confidenceFill.style.width =
+            (data.vision_result.confidence * 100) + "%";
+
+        //////////////////////////////////////////////////////
+        // WEATHER
+        //////////////////////////////////////////////////////
+
+        weatherContent.innerHTML =
+            "City: " + data.weather.city +
+            "<br>Temp: " + data.weather.temperature +
+            "<br>Humidity: " + data.weather.humidity;
+
+        //////////////////////////////////////////////////////
+        // MARKET
+        //////////////////////////////////////////////////////
+
+        marketContent.innerHTML =
+            "Commodity: " + data.mandi_prices.commodity;
+
+        //////////////////////////////////////////////////////
+        // SCHEMES
+        //////////////////////////////////////////////////////
+
+        if (data.government_schemes.length > 0) {
+
+            governmentSchemes.innerHTML = "";
+
+            data.government_schemes.forEach(scheme => {
+
+                governmentSchemes.innerHTML +=
+                    "<p><b>" + scheme.name + "</b><br>" +
+                    scheme.benefit + "<br>" +
+                    scheme.eligibility + "</p>";
+
+            });
+
+        } else {
+
+            governmentSchemes.innerHTML =
+                "No schemes available";
+
+        }
+
+    }
+    catch (err) {
+
+        alert("Error: " + err);
+
+    }
+
+    analyzeBtn.innerText = "Analyze Crop Health";
+
+});

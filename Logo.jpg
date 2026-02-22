@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="icon" type="image/png" href="Logo.jpg">
+
+<title>KisanSetu - Smart Agro Advisor</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&family=Tektur:wght@400..900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+
+</head>
+
+
+<body>
+
+<header class="nav">
+
+<div class="nav-inner">
+
+<div class="brand">
+
+<img src="Logo.jpg" style="width:135px;height:135px;border-radius:50%;">
+
+</div>
+
+<nav class="nav-links">
+
+<a href="#">The Farm</a>
+<a href="#">Products</a>
+<a href="#">About Us</a>
+<a href="#">Feedback</a>
+
+</nav>
+
+</div>
+
+</header>
+
+
+<main class="app">
+
+<section class="panel panel-form">
+
+<h1 style="font-family:Tektur;color:white;">
+Upload Leaf & Get Advice
+</h1>
+
+<p class="sub">
+Quick crop disease diagnosis with weather and market insights.
+</p>
+
+
+<div class="card upload-card">
+
+
+<div id="uploadZone" class="upload-zone">
+
+<input id="imageInput" type="file" accept="image/*">
+
+<div class="upload-inner">
+
+<img src="https://www.pngplay.com/wp-content/uploads/8/Upload-Icon-Logo-PNG-Clipart-Background.png"
+style="width:100px;height:100px;">
+
+<div>
+
+<div style="font-family:'Love Ya Like A Sister';font-size:20px;">
+Drag & drop leaf image
+</div>
+
+<div>or</div>
+
+<button id="uploadBtn" class="btn gradient">
+Upload Image
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div id="previewWrap" class="preview hidden">
+
+<img id="previewImg">
+
+<button id="removeImg" class="btn ghost">
+Remove
+</button>
+
+</div>
+
+
+
+<div class="form-grid">
+
+<div class="form-field">
+
+<label>Enter Location</label>
+
+<input id="city" placeholder="Example: Ballari">
+
+</div>
+
+
+<div class="form-field">
+
+<label>Enter Crop Name</label>
+
+<input id="cropInput" placeholder="Example: Potato">
+
+</div>
+
+</div>
+
+
+<button id="analyzeBtn" class="btn gradient big">
+Analyze Crop Health
+</button>
+
+
+</div>
+
+</section>
+
+
+
+<section class="panel panel-results hidden" id="resultsPanel">
+
+<h2 style="font-family:Tektur;color:white;">
+Analysis Results
+</h2>
+
+
+<div class="result-grid">
+
+
+<div class="card result-card">
+
+<h3>Disease Detection</h3>
+
+<div id="diseaseName">-</div>
+
+<div id="severityBadge">-</div>
+
+<div id="recommendation">-</div>
+
+<div class="confidence">
+
+Confidence
+
+<div class="confidence-bar">
+
+<div id="confidenceFill"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="card result-card">
+
+<h3>Weather</h3>
+
+<div id="weatherContent">-</div>
+
+</div>
+
+
+
+<div class="card result-card">
+
+<h3>Market Prices</h3>
+
+<div id="marketContent">-</div>
+
+</div>
+
+
+
+<div class="card result-card">
+
+<h3>Government Schemes</h3>
+
+<div id="governmentSchemes">
+No schemes available
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+KisanSetu - Smart Agro Advisor
+
+<br>
+
+© 2026 All rights reserved
+
+</footer>
+
+
+<script src="app.js"></script>
+
+</body>
+
+</html>

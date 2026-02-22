@@ -1,0 +1,40 @@
+{
+  "all": [
+    {
+      "name": "PM-KISAN Scheme",
+      "benefit": "₹6000 per year income support",
+      "eligibility": "All small and marginal farmers",
+      "link": "https://pmkisan.gov.in"
+    },
+    {
+      "name": "Soil Health Card Scheme",
+      "benefit": "Provides soil testing and fertilizer guidance",
+      "eligibility": "All farmers",
+      "link": "https://soilhealth.dac.gov.in"
+    }
+  ],
+
+  "potato": [
+    {
+      "name": "PMFBY (Crop Insurance Scheme)",
+      "benefit": "Provides insurance against crop loss",
+      "eligibility": "All farmers",
+      "link": "https://pmfby.gov.in"
+    },
+    {
+      "name": "National Food Security Mission",
+      "benefit": "Subsidy on potato seeds and fertilizers",
+      "eligibility": "Potato farmers",
+      "link": "https://nfsm.gov.in"
+    }
+  ],
+
+  "tomato": [
+    {
+      "name": "eNAM Scheme",
+      "benefit": "Sell crops online for better price",
+      "eligibility": "All farmers",
+      "link": "https://enam.gov.in"
+    }
+  ]
+}
